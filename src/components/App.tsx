@@ -1,19 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "../App.css";
 import Header from "./Header";
 import Movie from "./Movie";
 import spinner from "../assets/ajax-loader.gif";
 import Search from "./Search";
-import { MovieType } from "../types/movie";
+import { useSearchContext } from "../Context/movie-context";
 const MOVIE_API_URL = "https://www.omdbapi.com/?s=man&apikey=4a3b711b";
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
-  const [movies, setMovies] = useState([] as Array<MovieType>);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const {
+    loading,
+    setLoading,
+    movies,
+    setMovies,
+    errorMessage,
+    setErrorMessage,
+  } = useSearchContext();
 
   useEffect(() => {
-    console.log(15415);
     fetch(MOVIE_API_URL)
       .then((response) => response.json())
       .then((jsonResponse) => {
@@ -42,7 +46,6 @@ const App = () => {
         }
       });
   };
-  console.log(12522);
 
   return (
     <div className="App">
