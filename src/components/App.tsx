@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../App.css";
 import Header from "./Header";
 import Movie from "./Movie";
@@ -8,14 +8,10 @@ import { useSearchContext } from "../Context/movie-context";
 const MOVIE_API_URL = "https://www.omdbapi.com/?s=man&apikey=4a3b711b";
 
 const App = () => {
-  const {
-    loading,
-    setLoading,
-    movies,
-    setMovies,
-    errorMessage,
-    setErrorMessage,
-  } = useSearchContext();
+  const { movies, setMovies } = useSearchContext();
+  const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
+  console.log("context render", movies, loading, errorMessage);
 
   useEffect(() => {
     fetch(MOVIE_API_URL)
